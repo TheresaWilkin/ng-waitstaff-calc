@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Waitstaff Calculator</title>
+    <script src="https://code.angularjs.org/1.3.11/angular.js"></script>
+    <script src="https://code.angularjs.org/1.3.11/angular-messages.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles.css">  </head>
+  <body ng-controller="myCtrl as vm">
+    <h1>Waitstaff Calculator</h1>
+    <section class="mealDetails">
+      <h2>Enter the Meal Details</h2>
+      <form name="mealDetails" ng-submit="vm.submit(mealDetails)" novalidate>
+        <label for="price">Base Meal Price: $</label>
+        <input name="price" type="text" required pattern="^[0-9\.\-\/]+$" ng-model="vm.price" /> </br>
+        <div ng-if="mealDetails.$submitted" ng-messages="mealDetails.price.$error">
+            <span class="error" ng-message="required">Field is required!</span>
+            <span class="error" ng-message="pattern">Field must be a number!</span>
+        </div>
+
+        <label for="tax">Tax Rate: %</label>
+        <input name="tax" type="text" required pattern="^[0-9\.\-\/]+$" ng-model="vm.tax" /> </br>
+        <div ng-if="mealDetails.$submitted" ng-messages="mealDetails.tax.$error">
+            <span class="error" ng-message="required">Field is required!</span>
+            <span class="error" ng-message="pattern">Field must be a number!</span>
+        </div>
+
+        <label for="tipPerc">Tip Percentage: %</label>
+        <input name="tipPerc" type="text" required pattern="^[0-9\.\-\/]+$" ng-model="vm.tipPerc" /> </br>
+        <div ng-if="mealDetails.$submitted" ng-messages="mealDetails.tipPerc.$error">
+            <span class="error" ng-message="required">Field is required!</span>
+            <span class="error" ng-message="pattern">Field must be a number!</span>
+        </div>
+
+        <button type="submit">Submit</button>
+        <button type="clear" ng-click="vm.cancel(mealDetails)">Cancel</button>
+      </form>
+    </section>
+
+    <section class="customerCharges">
+      <h2>Customer Charges</h2>
+      <div>
+        <p>Subtotal {{ vm.subtotal | currency }}</p>
+        <p>Tip {{ vm.tip | currency }}</p>
+      </div>
+      <p>Total {{ vm.total | currency }}</p>
+    </section>
+
+    <section class="myEarnings">
+      <h2>My Earnings Info</h2>
+      <p>Tip Total: {{ vm.calcTips() | currency }}</p>
+      <p>Meal count: {{ vm.tips.length }}</p>
+      <p>Average Tip Per Meal: {{ vm.calcAve() | currency }}</p>
+    </section>
+    <button ng-click="vm.reset(mealDetails)">Reset</button>
+  </body>
+</html>

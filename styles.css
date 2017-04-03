@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  text-align: center;
+}
+
+p, label, input, button {
+  font-size: 18px;
+}
+
+body {
+  max-width: 900px;
+  margin: auto;
+}
+
+.mealDetails, .customerCharges, .myEarnings {
+  width: 400px;
+  border: 2px solid black;
+  float: left;
+  margin: 10px 20px;
+}
+
+input {
+  margin: 20px auto;
+}
+
+button {
+  margin: 20px;
+}
+
+.mealDetails {
+  height: 405px;
+}
